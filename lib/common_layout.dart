@@ -46,7 +46,17 @@ class CommonLayout extends StatelessWidget {
                   title: Text('Inicio', style: TextStyle(color: primaryColor)),
                   onTap: () {
                     Navigator.pop(context); // Cerrar el Drawer
-                    Navigator.pushNamed(context, '/'); // Ir a la vista Home
+                    Navigator.pushNamed(context, '/home'); // Ir a la vista Home
+                  },
+                ),
+                ListTile(
+                  leading: Icon(Icons.exit_to_app, color: primaryColor),
+                  title: Text('Cerrar sesión',
+                      style: TextStyle(color: primaryColor)),
+                  onTap: () {
+                    Navigator.pop(context); // Cerrar el Drawer
+                    Navigator.pushNamed(
+                        context, '/login'); // Ir a la vista Login
                   },
                 ),
               ],

@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       title: 'App',
       initialRoute: '/login',
       routes: {
-        '/': (BuildContext context) => const HomeView(),
+        '/home': (BuildContext context) => const HomeView(),
         '/login': (BuildContext context) => const LoginView(),
       },
     );

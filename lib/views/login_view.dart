@@ -108,7 +108,7 @@ class _LoginViewState extends State<LoginView> {
                   onPressed: _rutErrorText == null
                       ? () {
                           if (_rutErrorText == null) {
-                            Navigator.pushNamed(context, '/');
+                            Navigator.pushReplacementNamed(context, '/home');
                           }
                         }
                       : null,

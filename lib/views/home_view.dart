@@ -5,7 +5,7 @@ import '../services/orden_service.dart';
 import 'orden_details_view.dart';
 
 class HomeView extends StatefulWidget {
-  const HomeView({super.key});
+  const HomeView({Key? key});
 
   @override
   _HomeViewState createState() => _HomeViewState();
@@ -51,36 +51,58 @@ class _HomeViewState extends State<HomeView> {
         children: [
           Padding(
             padding: const EdgeInsets.only(top: 200.0, left: 32.0, right: 32.0),
-            child: TextField(
-              controller: _searchController,
-              onChanged: (query) {
-                setState(() {
-                  _showClearIcon = query.isNotEmpty;
-                  _showError = false;
-                });
-                _fetchOrdenes(query);
-              },
-              decoration: InputDecoration(
-                labelText: 'Buscar',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(15.0),
+            child: Stack(
+              children: [
+                Align(
+                  alignment: Alignment.center,
+                  child: TextField(
+                    controller: _searchController,
+                    onChanged: (query) {
+                      setState(() {
+                        _showClearIcon = query.isNotEmpty;
+                        _showError = false;
+                      });
+                    },
+                    decoration: InputDecoration(
+                      labelText: 'Buscar',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                      errorText:
+                          _showError ? 'No se encontraron resultados' : null,
+                    ),
+                  ),
                 ),
-                errorText: _showError ? 'No se encontraron resultados' : null,
-                suffixIcon: _showClearIcon
-                    ? IconButton(
-                        icon: const Icon(Icons.clear),
+                Positioned(
+                  right: 0,
+                  top: 0,
+                  bottom: 0,
+                  child: Row(
+                    children: [
+                      if (_showClearIcon)
+                        IconButton(
+                          icon: const Icon(Icons.clear),
+                          onPressed: () {
+                            _searchController.clear();
+                            setState(() {
+                              _showClearIcon = false;
+                              _ordenes.clear();
+                              _showError = false;
+                            });
+                          },
+                        ),
+                      IconButton(
+                        icon: const Icon(Icons.search),
                         onPressed: () {
-                          _searchController.clear();
-                          setState(() {
-                            _showClearIcon = false;
-                            _ordenes.clear();
-                            _showError =
-                                false; // Limpia el error al borrar el texto
-                          });
+                          final query = _searchController.text;
+                          _fetchOrdenes(query);
                         },
-                      )
-                    : null,
-              ),
+                        color: Theme.of(context).primaryColor,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ),
           const SizedBox(height: 10),

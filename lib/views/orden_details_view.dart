@@ -21,6 +21,24 @@ class OrdenDetailsView extends StatelessWidget {
               'ID de la Orden: ${orden.idorden}',
               style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
+            Text(
+              'ID del Paciente: ${orden.idPaciente}',
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            Text(
+              'ID del Usuario del Recepcionista: ${orden.idUsuarioRecepcionista}',
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            Text(
+              'ID del Doctor: ${orden.idDoctor}',
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            if (orden.idAsistenteDental != null)
+              Text(
+                'ID del Asistente Dental: ${orden.idAsistenteDental}',
+                style:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
           ],
         ),
       ),
